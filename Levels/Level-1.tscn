@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2pys02rskf2r"]
+
+[ext_resource type="PackedScene" uid="uid://c3cqatccl8djj" path="res://Player/player.tscn" id="1_qxf5m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_40r6o"]
+sky_top_color = Color(0.188235, 0.458824, 0.560784, 1)
+sky_horizon_color = Color(0.597059, 0.656956, 0.673446, 1)
+ground_horizon_color = Color(0.597059, 0.656956, 0.673446, 1)
+
+[sub_resource type="Sky" id="Sky_jndov"]
+sky_material = SubResource("ProceduralSkyMaterial_40r6o")
+
+[sub_resource type="Environment" id="Environment_220tp"]
+background_mode = 2
+sky = SubResource("Sky_jndov")
+tonemap_mode = 2
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfqma"]
+albedo_color = Color(0.388235, 0.168627, 0.188235, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ikv46"]
+albedo_color = Color(1, 0.172549, 0.333333, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4spp"]
+albedo_color = Color(0.529412, 0.639216, 0.188235, 1)
+
+[node name="Level-1" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.62388, -0.534988, 0.569704, 0, 0.728969, 0.684547, -0.78152, 0.427075, -0.454789, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_220tp")
+
+[node name="Floor" type="CSGBox3D" parent="." groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+use_collision = true
+size = Vector3(30, 8, 5)
+material = SubResource("StandardMaterial3D_lfqma")
+
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.2, 0)
+use_collision = true
+size = Vector3(2, 0.4, 2)
+material = SubResource("StandardMaterial3D_ikv46")
+
+[node name="GoalPad" type="CSGBox3D" parent="." groups=["Goal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.2, 0)
+use_collision = true
+size = Vector3(2, 0.4, 2)
+material = SubResource("StandardMaterial3D_y4spp")
+
+[node name="Player" parent="." instance=ExtResource("1_qxf5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.4, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 6, 10)
+fov = 80.0
