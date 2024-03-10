@@ -1,6 +1,7 @@
 extends RigidBody3D
 
-@export var thrust: float = 1000
+@export_range(750.0, 3000.0) var thrust: float
+@export var torque_thrust: float = 100;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,14 +13,22 @@ func _process(delta: float) -> void:
 		apply_central_force(basis.y * delta * thrust)
 		
 	if Input.is_action_pressed("rotate_left"):
-		apply_torque(Vector3(0.0,0.0, 100) * delta)
+		apply_torque(Vector3(0.0,0.0, torque_thrust) * delta)
 		
 		
 	if Input.is_action_pressed("rotate_right"):
-		apply_torque(Vector3(0.0,0.0, -100) * delta)
+		apply_torque(Vector3(0.0,0.0, -torque_thrust) * delta)
 
 func _on_body_entered(body: Node) -> void:
 	if "Goal" in body.get_groups():
-		print("You win!")
+		complete_level()
 	if "Hazard" in body.get_groups():
-		print("You crashed! Try Again")
+		crash_sequence()
+
+func complete_level() -> void:
+	print("You win!")
+	get_tree().quit()
+
+func crash_sequence():
+	print("Kaboom!")
+	get_tree().reload_current_scene()
