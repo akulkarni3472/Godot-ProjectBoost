@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2pys02rskf2r"]
+[gd_scene load_steps=9 format=3 uid="uid://b87u3kaapbu6b"]
 
-[ext_resource type="Script" path="res://Levels/GoalPad.gd" id="1_pg3ux"]
-[ext_resource type="PackedScene" uid="uid://c3cqatccl8djj" path="res://Player/player.tscn" id="1_qxf5m"]
+[ext_resource type="Script" path="res://Levels/GoalPad.gd" id="1_p0ebx"]
+[ext_resource type="PackedScene" uid="uid://c3cqatccl8djj" path="res://Player/player.tscn" id="2_yhq3l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_40r6o"]
 sky_top_color = Color(0.188235, 0.458824, 0.560784, 1)
@@ -54,10 +54,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.2, 0)
 use_collision = true
 size = Vector3(2, 0.4, 2)
 material = SubResource("StandardMaterial3D_y4spp")
-script = ExtResource("1_pg3ux")
+script = ExtResource("1_p0ebx")
 file_path = "res://Levels/Level-1.tscn"
 
-[node name="Player" parent="." instance=ExtResource("1_qxf5m")]
+[node name="Player" parent="." instance=ExtResource("2_yhq3l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.4, 0)
 thrust = 1000.0
 
